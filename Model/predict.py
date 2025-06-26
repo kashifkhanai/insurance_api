@@ -11,7 +11,7 @@ with open("Model/model.pkl", "rb") as f:
     
 def predict_output(user_input: dict):
     
-    input_df = pd.DataFrame(user_input)
+    input_df = pd.DataFrame([user_input])
     
     output = model.predict(input_df)[0]
     
