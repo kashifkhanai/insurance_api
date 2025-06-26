@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field, computed_field,field_validator
 from typing import Annotated, Literal
 import pickle
 import pandas as pd
@@ -35,6 +35,11 @@ class UserInput(BaseModel):
        'business_owner', 'unemployed', 'private_job'], Field(..., description="Occupation of the user")]
     
     
+    @field_validator("city")
+    def normalize_city(cls, v: str) -> str:
+        v = v.strip().title()
+        return v
+
     @computed_field
     @property
     def bmi(self) -> float:
