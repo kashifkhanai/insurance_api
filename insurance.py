@@ -82,6 +82,10 @@ class UserInput(BaseModel):
 @app.get("/")
 def home():
     return {"message": "Insurance Premium Prediction API"}
+
+@app.get("/health")
+def health_check():
+    return JSONResponse(status_code=200, content={"status": "healthy", "message": "API is running smoothly"})
         
 @app.post("/predict")
 def predict_premium(data: UserInput):
