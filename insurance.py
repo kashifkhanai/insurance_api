@@ -7,6 +7,9 @@ import pandas as pd
 
 app = FastAPI()
 
+# Define the version of the model
+model_version = "1.0.0"
+
 # Load the pre-trained model
 with open("Model/model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -85,8 +88,13 @@ def home():
 
 @app.get("/health")
 def health_check():
-    return JSONResponse(status_code=200, content={"status": "healthy", "message": "API is running smoothly"})
-        
+    return {
+        "status": "healthy",
+        "message": "API is running smoothly",
+        "model_version": model_version
+    }
+    
+    
 @app.post("/predict")
 def predict_premium(data: UserInput):
     
