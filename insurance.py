@@ -80,7 +80,7 @@ class UserInput(BaseModel):
 
 # Define the API endpoints
 @app.get("/")
-def hello():
+def home():
     return {"message": "Insurance Premium Prediction API"}
         
 @app.post("/predict")
